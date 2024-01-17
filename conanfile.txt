@@ -1,0 +1,13 @@
+[requires]
+fmt/10.1.1
+grpc/1.54.3
+protobuf/3.21.12
+google-cloud-cpp/2.12.0
+re2/20231101
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout
