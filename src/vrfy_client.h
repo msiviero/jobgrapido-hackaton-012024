@@ -1,3 +1,5 @@
+#ifndef VRFY_CLIENT_H
+#define VRFY_CLIENT_H
 
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
@@ -17,3 +19,5 @@ class VrfyClient {
 
   bool verify(string email);
 };
+
+#endif

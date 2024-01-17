@@ -8,16 +8,19 @@
 #include "./generated/service.grpc.pb.h"
 
 #include "./email_verifier.h"
+#include "vrfy_client.h"
 
 using grpc::Status;
+using std::shared_ptr;
 
 class MailVerifierImpl final : public MailVerifier::Service {
 
  private:
    EmailVerifier *email_verifier;
+   VrfyClient *vrfy_client;
 
  public:
-  MailVerifierImpl(std::shared_ptr<EmailVerifier> email_verifier);
+  MailVerifierImpl(shared_ptr<EmailVerifier> email_verifier, shared_ptr<VrfyClient> vrfy_client_ptr);
 
   Status SyntaxVerification(grpc::ServerContext *context, const VerificationRequest *request,
                VerificationResponse *reply) override;

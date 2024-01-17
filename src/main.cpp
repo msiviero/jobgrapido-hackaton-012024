@@ -1,4 +1,5 @@
 #include <fmt/core.h>
+#include <google/cloud/pubsub/publisher.h>
 #include <grpcpp/create_channel.h>
 #include <grpcpp/security/server_credentials.h>
 #include <grpcpp/server_builder.h>
@@ -8,12 +9,15 @@
 
 #include "api.h"
 #include "email_verifier.h"
+#include "pubsub.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
 
 using std::make_shared;
 using std::unique_ptr;
+
+using pubsub_service::PubsubService;
 
 int main() {
   // get configs
@@ -33,9 +37,14 @@ int main() {
                           grpc::InsecureChannelCredentials());
   auto dns = make_shared<Dns>();
   auto email_verifier = make_shared<EmailVerifier>(dns);
+  auto vrfy_client = make_shared<VrfyClient>(channel);
+
+  auto publisher =
+      make_shared<Publisher>(pubsub_service::MakePublisher(pubsub_project, pubsub_topic));
+  auto pubsub_service = make_shared<PubsubService>(publisher);
 
   // build api
-  MailVerifierImpl email_verifier_api(email_verifier);
+  MailVerifierImpl email_verifier_api(email_verifier, vrfy_client);
 
   // start a server
   ServerBuilder builder;

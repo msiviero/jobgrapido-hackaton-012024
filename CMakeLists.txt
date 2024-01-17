@@ -17,6 +17,7 @@ add_library(
     ${PROJECT_NAME}-objects OBJECT 
     "${CMAKE_CURRENT_LIST_DIR}/proto/service.proto"
     "${CMAKE_CURRENT_LIST_DIR}/proto/vrfy.proto"
+    "${CMAKE_CURRENT_LIST_DIR}/proto/pubsub.proto"
 )
 
 add_executable(${PROJECT_NAME} 
@@ -29,6 +30,7 @@ add_executable(${PROJECT_NAME}
 
   src/api.cpp
   src/dns.cpp
+  src/pubsub.cpp
   src/vrfy_client.cpp
   src/email_verifier.cpp
 )
