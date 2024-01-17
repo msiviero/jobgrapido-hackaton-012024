@@ -1,6 +1,6 @@
 [requires]
 fmt/10.1.1
-c-ares/1.19.1
+ldns/1.8.2
 grpc/1.54.3
 protobuf/3.21.12
 google-cloud-cpp/2.12.0

@@ -1,10 +1,13 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(PROTO_BINARY_DIR "${CMAKE_CURRENT_LIST_DIR}/src/generated")
+
 cmake_minimum_required(VERSION 3.20)
 
 project(grpc-verify CXX)
 
 find_package(fmt REQUIRED)
 find_package(re2 REQUIRED)
-find_package(c-ares REQUIRED)
+find_package(ldns REQUIRED)
 
 find_package(protobuf CONFIG REQUIRED)
 find_package(gRPC CONFIG REQUIRED)
@@ -36,7 +39,7 @@ protobuf_generate(
 )
 
 target_link_libraries(${PROJECT_NAME} fmt::fmt)
-target_link_libraries(${PROJECT_NAME} c-ares)
+target_link_libraries(${PROJECT_NAME} ldns::ldns)
 target_link_libraries(${PROJECT_NAME} re2::re2)
 target_link_libraries(${PROJECT_NAME} gRPC::grpc++)
 target_link_libraries(${PROJECT_NAME} google-cloud-cpp::google-cloud-cpp)
