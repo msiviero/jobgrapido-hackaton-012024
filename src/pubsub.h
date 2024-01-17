@@ -4,6 +4,7 @@
 #include <string>
 
 #include "google/cloud/pubsub/publisher.h"
+#include "generated/pubsub.pb.h"
 
 using std::string;
 using std::shared_ptr;
@@ -22,7 +23,7 @@ class PubsubService {
  public:
   PubsubService(shared_ptr<Publisher> publisher);
 
-  void publish(string message);
+  void publish(VerificationOutput message);
 };
 
 Publisher MakePublisher(string project_id, string topic_id);

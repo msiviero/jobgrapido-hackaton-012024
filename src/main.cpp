@@ -44,7 +44,7 @@ int main() {
   auto pubsub_service = make_shared<PubsubService>(publisher);
 
   // build api
-  MailVerifierImpl email_verifier_api(email_verifier, vrfy_client);
+  MailVerifierImpl email_verifier_api(email_verifier, vrfy_client, pubsub_service);
 
   // start a server
   ServerBuilder builder;

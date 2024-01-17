@@ -27,6 +27,8 @@ add_executable(${PROJECT_NAME}
   src/generated/service.pb.cc
   src/generated/vrfy.grpc.pb.cc
   src/generated/vrfy.pb.cc
+  src/generated/pubsub.grpc.pb.cc
+  src/generated/pubsub.pb.cc
 
   src/api.cpp
   src/dns.cpp
