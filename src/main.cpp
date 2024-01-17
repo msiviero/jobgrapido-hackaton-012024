@@ -32,19 +32,21 @@ int main() {
       fmt::format("0.0.0.0:{}", server_port ? server_port : "50051");
 
   // build deps
-  auto channel =
-      grpc::CreateChannel(fmt::format("{}:{}", vrfy_endpoint, vrfy_port),
-                          grpc::InsecureChannelCredentials());
+  auto channel = grpc::CreateChannel(
+      fmt::format("{}:{}", vrfy_endpoint ? vrfy_endpoint : "",
+                  vrfy_port ? vrfy_endpoint : ""),
+      grpc::InsecureChannelCredentials());
   auto dns = make_shared<Dns>();
   auto email_verifier = make_shared<EmailVerifier>(dns);
   auto vrfy_client = make_shared<VrfyClient>(channel);
 
-  auto publisher =
-      make_shared<Publisher>(pubsub_service::MakePublisher(pubsub_project, pubsub_topic));
+  auto publisher = make_shared<Publisher>(pubsub_service::MakePublisher(
+      pubsub_project ? pubsub_project : "", pubsub_topic ? pubsub_topic : ""));
   auto pubsub_service = make_shared<PubsubService>(publisher);
 
   // build api
-  MailVerifierImpl email_verifier_api(email_verifier, vrfy_client, pubsub_service);
+  MailVerifierImpl email_verifier_api(email_verifier, vrfy_client,
+                                      pubsub_service);
 
   // start a server
   ServerBuilder builder;
