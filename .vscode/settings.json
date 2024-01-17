@@ -2,5 +2,6 @@
   "files.associations": {
     "iostream": "cpp"
   },
-  "cloudcode.duetAI.inlineSuggestions.enableAuto": false
+  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

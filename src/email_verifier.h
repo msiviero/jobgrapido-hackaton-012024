@@ -1,5 +1,5 @@
-#ifndef SERVICE_EMAIL_VERIFIER_H
-#define SERVICE_EMAIL_VERIFIER_H
+#ifndef EMAIL_VERIFIER_H
+#define EMAIL_VERIFIER_H
 
 #include <string>
 

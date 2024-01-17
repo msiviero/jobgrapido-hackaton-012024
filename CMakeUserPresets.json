@@ -4,6 +4,6 @@
         "conan": {}
     },
     "include": [
-        "/Users/marco.siviero/Downloads/jobgrapido-hackaton-012024/build/build/Release/generators/CMakePresets.json"
+        "/home/marco/Downloads/jobgrapido-hackaton-012024/build/build/Release/generators/CMakePresets.json"
     ]
 }
