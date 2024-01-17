@@ -10,3 +10,6 @@ build:
 
 clean:
 	rm -rf build src/generated
+
+grpcui:
+	grpcui -plaintext -import-path=./proto -proto=service.proto 127.0.0.1:50051
