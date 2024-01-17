@@ -1,19 +1,25 @@
 #ifndef EMAIL_VERIFIER_H
 #define EMAIL_VERIFIER_H
 
-#include <string>
 #include <re2/re2.h>
+
+#include <string>
+
+#include "dns.h"
 
 using std::string;
 
 class EmailVerifier {
- 
- public:
-  EmailVerifier();
+ private:
+  string extract_domain(string email);
+  Dns *dns;
 
-  bool verify(string email_address);
-  bool regex_verify(string email_address);
-  bool smtp_verify(string email_address);
+ public:
+  EmailVerifier(std::shared_ptr<Dns> dns);
+
+  bool dns_verify(string email);
+  bool regex_verify(string email);
+  bool smtp_verify(string email);
 };
 
 #endif

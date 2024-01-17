@@ -17,18 +17,37 @@ MailVerifierImpl::MailVerifierImpl(
 Status MailVerifierImpl::SyntaxVerification(grpc::ServerContext *context,
                                             const VerificationRequest *request,
                                             VerificationResponse *reply) {
-  auto result = this->email_verifier->regex_verify(request->email());
+  auto email = request->email();
+  auto result = this->email_verifier->regex_verify(email);
 
   reply->set_valid(result);
-  reply->set_error_message(fmt::format("Email {0} {1} valid", request->email(), result ? "IS" : "IS NOT"));
-  
+  reply->set_error_message(
+      fmt::format("Email {0} {1} valid", email, result ? "IS" : "IS NOT"));
+
   return Status::OK;
 }
 
 Status MailVerifierImpl::SimpleVerification(grpc::ServerContext *context,
                                             const VerificationRequest *request,
                                             VerificationResponse *reply) {
-  reply->set_error_message(fmt::format("Hello {0}", request->email()));
+  auto email = request->email();
+  auto syntax_result = this->email_verifier->regex_verify(email);
+
+  if (!syntax_result) {
+    reply->set_valid(false);
+    reply->set_error_message(fmt::format("Email {0} syntax IS NOT valid", email));
+    return Status::OK;
+  }
+
+  auto dns_result = this->email_verifier->dns_verify(email);
+  if (!dns_result) {
+    reply->set_valid(false);
+    reply->set_error_message(fmt::format("Email {0} domain IS NOT valid (no MX record)", email));
+    return Status::OK;
+  }
+
+  reply->set_valid(true);
+  reply->set_error_message(fmt::format("Email {0} IS valid", email));
   return Status::OK;
 }
 
