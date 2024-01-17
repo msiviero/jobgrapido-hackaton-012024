@@ -1,4 +1,5 @@
 #include <fmt/core.h>
+#include <grpcpp/create_channel.h>
 #include <grpcpp/security/server_credentials.h>
 #include <grpcpp/server_builder.h>
 #include <re2/re2.h>
@@ -16,14 +17,23 @@ using std::unique_ptr;
 
 int main() {
   // get configs
+  auto pubsub_project = getenv("PUBSUB_PROJECT");
+  auto pubsub_topic = getenv("PUBSUB_TOPIC");
+
+  auto vrfy_endpoint = getenv("VRFY_ENDPOINT");
+  auto vrfy_port = getenv("VRFY_PORT");
+
   auto server_port = getenv("SERVER_PORT");
   auto server_address =
       fmt::format("0.0.0.0:{}", server_port ? server_port : "50051");
 
   // build deps
+  auto channel =
+      grpc::CreateChannel(fmt::format("{}:{}", vrfy_endpoint, vrfy_port),
+                          grpc::InsecureChannelCredentials());
   auto dns = make_shared<Dns>();
   auto email_verifier = make_shared<EmailVerifier>(dns);
-  
+
   // build api
   MailVerifierImpl email_verifier_api(email_verifier);
 

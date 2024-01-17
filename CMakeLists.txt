@@ -16,6 +16,7 @@ find_package(google-cloud-cpp CONFIG REQUIRED)
 add_library(
     ${PROJECT_NAME}-objects OBJECT 
     "${CMAKE_CURRENT_LIST_DIR}/proto/service.proto"
+    "${CMAKE_CURRENT_LIST_DIR}/proto/vrfy.proto"
 )
 
 add_executable(${PROJECT_NAME} 
@@ -23,9 +24,12 @@ add_executable(${PROJECT_NAME}
   
   src/generated/service.grpc.pb.cc
   src/generated/service.pb.cc
+  src/generated/vrfy.grpc.pb.cc
+  src/generated/vrfy.pb.cc
 
   src/api.cpp
   src/dns.cpp
+  src/vrfy_client.cpp
   src/email_verifier.cpp
 )
 
