@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/home/marco/Downloads/jobgrapido-hackaton-012024/build/build/Release/generators/CMakePresets.json"
+    ]
+}

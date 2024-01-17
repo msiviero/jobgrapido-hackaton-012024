@@ -1,0 +1,4 @@
+build
+src/generated
+CMakeCache.txt
+gcp-credentials.json

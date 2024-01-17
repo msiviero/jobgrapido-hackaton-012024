@@ -1,7 +1,8 @@
 #include <iostream>
+#include <fmt/core.h>
 
 int main() {
-  std::cout << "Hello World!";
+  auto server_address = fmt::format("0.0.0.0:{}", 50051);
+  std::cout << server_address;
   return 0;
 }
-
