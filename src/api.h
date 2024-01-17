@@ -1,6 +1,10 @@
 #ifndef GRPC_API_H
 #define GRPC_API_H
 
+#include <grpc/grpc.h>
+#include <grpcpp/server_context.h>
+
+#include "./generated/service.pb.h"
 #include "./generated/service.grpc.pb.h"
 
 using grpc::Status;
