@@ -3,7 +3,8 @@
 
 #include <re2/re2.h>
 
-#include <string>
+#include <string.h>
+#include <memory.h>
 
 #include "dns.h"
 

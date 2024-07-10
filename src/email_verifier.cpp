@@ -4,7 +4,9 @@
 #include <re2/re2.h>
 
 #include <iostream>
-#include <string>
+
+#include <string.h>
+#include <memory.h>
 
 using std::string;
 
